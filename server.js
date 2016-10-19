@@ -11,10 +11,13 @@ var port = process.env.PORT || 8080;        // set our port
 
 /* Setup routes */
 var router = express.Router();
-router.get('/', function(req, res) {
-  res.json({ message: 'hooray! welcome to our api!' });
+router.get('/pizzas', function(req, res) {
+  res.sendFile( __dirname + '/pizzas.json');
 });
-app.use('/api', router);
+router.get('/orders', function(req, res) {
+  res.sendFile( __dirname + '/orders.json');
+});
+app.use('/', router);
 
 /* Start the server */
 app.listen(port);
