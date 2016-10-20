@@ -2,6 +2,7 @@
 var express    = require('express');
 var app        = express();
 var bodyParser = require('body-parser');
+var apiLente = true;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -19,10 +20,22 @@ var port = process.env.PORT || 8080;        // set our port
 /* Setup routes */
 var router = express.Router();
 router.get('/pizzas', function(req, res) {
-  res.sendFile(__dirname + '/pizzas.json');
+  if (apiLente) {
+    setTimeout(function() {
+      res.sendFile(__dirname + '/pizzas.json');
+    }, 5000);
+  } else {
+    res.sendFile(__dirname + '/pizzas.json');
+  }
 });
 router.get('/orders', function(req, res) {
-  res.sendFile(__dirname + '/orders.json');
+  if (apiLente) {
+    setTimeout(function() {
+      res.sendFile(__dirname + '/orders.json');
+    }, 5000);
+  } else {
+    res.sendFile(__dirname + '/orders.json');
+  }
 });
 app.use('/', router);
 
