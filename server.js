@@ -2,7 +2,6 @@
 var express    = require('express');
 var app        = express();
 var bodyParser = require('body-parser');
-var apiLente = true;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -20,7 +19,7 @@ var port = process.env.PORT || 8080;        // set our port
 /* Setup routes */
 var router = express.Router();
 router.get('/pizzas', function(req, res) {
-  if (apiLente) {
+  if (process.env.API_LENTE == '1') {
     setTimeout(function() {
       res.sendFile(__dirname + '/pizzas.json');
     }, 5000);
@@ -29,7 +28,7 @@ router.get('/pizzas', function(req, res) {
   }
 });
 router.get('/orders', function(req, res) {
-  if (apiLente) {
+  if (process.env.API_LENTE ==  '1') {
     setTimeout(function() {
       res.sendFile(__dirname + '/orders.json');
     }, 5000);
